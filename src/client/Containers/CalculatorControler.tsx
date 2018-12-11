@@ -10,7 +10,7 @@ interface IState {
     cupsPW: number,
     stage: number
 }
-
+const APIURL = `https://us-central1-evolvedapi.cloudfunctions.net/EvolvedStore/?project=CoffeeCalculator`
 export default class CalculatorControler extends React.Component<{}, IState> {
     constructor(props: {}) {
         super(props);
@@ -77,18 +77,31 @@ export default class CalculatorControler extends React.Component<{}, IState> {
     };
 
 
+    public storeData = (data) => fetch(APIURL, {
+            method: "POST",
+            mode: "cors",
+            cache: "no-cache",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => console.log(res))
+        .catch(err => {throw new Error(err);});
+    
+
 
     public render(): JSX.Element {
         return (
             <div className="CalculatorControler">
                 
              
-                <header>
+                <div className="top">
                     <img src={require('../../../public/images/topLeft.jpg')} alt=""/>
                     <img src={require('../../../public/images/topRight.jpg')} alt=""/>
-                </header>
+                </div>
                 
-                <main>
+                <main className="main" role="main">
             
                     {
                         this.state.stage === 1 
@@ -104,19 +117,19 @@ export default class CalculatorControler extends React.Component<{}, IState> {
 
                     {
                         this.state.stage === 3
-                            ?   <StageThree restart={this.restart} cups={this.state.cupsPW} age={this.state.age} />
+                            ?   <StageThree storeData={this.storeData} restart={this.restart} cups={this.state.cupsPW} age={this.state.age} />
                             :   null
                     }
                 
                 </main>
 
-                <footer>
+                <div className="bottom">
                     {
                         this.state.stage !== 3
                             ?   <img src={require('../../../public/images/bottomLeft.jpg')} alt="" />
                             :   null
                     }
-                </footer>
+                </div>
                  
 
             </div>

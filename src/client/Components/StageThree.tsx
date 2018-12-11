@@ -4,7 +4,8 @@ import * as React from 'react';
 interface IProps {
     restart: any,
     cups: number,
-    age: number
+    age: number,
+    storeData: any
 }
 
 const StageThree = (props: IProps): JSX.Element=> { 
@@ -16,17 +17,24 @@ const StageThree = (props: IProps): JSX.Element=> {
         let pricePerYear: number = cupsPerYear * price;
         let interestDue: number = (pricePerYear * interest) / 100;
         let total: number = 0;
-        for (let i = 0; i < years; i++) {
+        for (let i: number = 0; i < years; i++) {
             total = Math.round((pricePerYear + total) + interestDue);
             interestDue = (total * interest) / 100;
-            const inflation = (pricePerYear * 2.40) / 100;
+            const inflation: number = (pricePerYear * 2.40) / 100;
             pricePerYear = pricePerYear + inflation;
             if (i == years-1) {
                 total = Math.round(total + interestDue);
-            }
-        }
+            };
+        };
         return total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
+    props.storeData({
+        "age": props.age,
+        "5Years": yearsCalc(5, 2.84),
+        "10Years": yearsCalc(10, 2.84),
+        "15Years": yearsCalc(15, 2.84),
+        "pension": yearsCalc((67-age), 2.00)
+    });
     return (
         <div className="stageThree">
             <h3>If you put the money you  usually spend on coffee into a Standard savings account with a 2.84% interest rate...</h3>
@@ -68,6 +76,7 @@ const StageThree = (props: IProps): JSX.Element=> {
                   this calculator is for illustration purposes only and figures can not be guaranteed. if you have any other questions about savings or pension contribution you are advised to speak to a qualified financial advisor.
                  </small>
             </p>
+            <div className="scroller"><i className="fas fa-angle-down"></i></div>
         </div>
     );
 };
