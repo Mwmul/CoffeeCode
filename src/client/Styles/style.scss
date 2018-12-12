@@ -69,7 +69,73 @@
     margin-bottom: 20px;
   }
 }
+.embedCode {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: left;
+  max-width: 750px;
+  z-index: 9999999;
+  background: white;
+  color: #ddd;
+  box-shadow: 0px 0px 55px 3px rgba(0,0,0,0.5);
+  border-radius: 12px 12px 0px 0px;
+  font-family: helvetica;
+  .inner {
+    margin: 15px;
+    padding: 15px;
+    color: black;
+    background: #F0F0F0;
+    box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.75);
+    text-align: left;
+  }
+  .embedHeader {
+    
+    width: 100%;
+    background: #575757;
+    border-radius: 7px 7px 0px 0px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    i {
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.05)
+      }
+    }
+    h3 {
+      font-family: helvetica;
+      font-weight: 400;
+    }
+  }
 
+}
+.embedCodeToggle {
+  height: 50px;
+  width: 50px;
+  background: rgbA(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #ddd;
+  font-weight: 400;
+  font-size: 1.8em;
+  position: fixed;
+  top: 90%;
+  left: calc(100% - 50px);
+  cursor: pointer;
+  transform-origin: right;
+  transition: 100ms;
+  &:hover {
+    transform: scale(1.05);
+  }
+  &:active {
+    transform: scale(1)
+  }
+}
 .calcForm {
   width: 100%;
   display: flex;
